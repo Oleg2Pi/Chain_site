@@ -1,15 +1,12 @@
 package by.polikarpov.entity;
 
-import com.sun.net.httpserver.Filter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "person")
 @Data
+@ToString(exclude = {"image", "executor"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -33,9 +30,9 @@ public class Person {
     @Column(name = "chat_id")
     private long chatId;
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ImagePerson image;
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Executor executor;
 }
