@@ -1,15 +1,13 @@
 package by.polikarpov.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "activity_area")
+@ToString(exclude = {"resumes"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +20,6 @@ public class ActivityArea {
 
     private String type;
 
-    @OneToMany(mappedBy = "activity_area", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "activityArea", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Resume> resumes;
 }

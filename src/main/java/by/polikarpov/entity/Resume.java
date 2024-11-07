@@ -1,13 +1,11 @@
 package by.polikarpov.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "resume")
+@ToString(exclude = {"executor", "activityArea", "workExperience", "userStatus"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,15 +20,15 @@ public class Resume {
     @JoinColumn(name = "executor_id", nullable = false, unique = true)
     private Executor executor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "activity_area_id")
     private ActivityArea activityArea;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "work_experience_id")
     private WorkExperience workExperience;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_status_id")
     private UserStatus userStatus;
 

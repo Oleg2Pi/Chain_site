@@ -1,15 +1,13 @@
 package by.polikarpov.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "work")
+@ToString(exclude = {"executor", "imageVideo"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
