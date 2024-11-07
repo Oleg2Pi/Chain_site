@@ -1,72 +1,19 @@
 package by.polikarpov.repository;
 
-import by.polikarpov.entity.Person;
+import by.polikarpov.entity.Resume;
 import by.polikarpov.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class PersonDaoIml implements Dao<Person, Integer> {
-
-    private Session session;
-
-    @Override
-    public void save(Person person) {
-    }
+public class ResumeDaoIml implements Dao<Resume, Integer>{
+    private Session session = HibernateUtils.getSession();
 
     @Override
-    public Person find(Integer id) {
-        session = HibernateUtils.getSession();
-        Person person = null;
-
+    public void save(Resume resume) {
         try {
             session.beginTransaction();
-
-            person = session.get(Person.class, id);
-
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            session.close();
-        }
-
-        return person;
-    }
-
-    @Override
-    public List<Person> findAll() {
-        session = HibernateUtils.getSession();
-        List<Person> persons = null;
-
-        try {
-            session.beginTransaction();
-
-            persons = session.createQuery("from Person").list();
-
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
-            }
-            throw new RuntimeException(e);
-        } finally {
-            session.close();
-        }
-
-        return persons;
-    }
-
-    @Override
-    public void update(Person person) {
-        session = HibernateUtils.getSession();
-
-        try {
-            session.beginTransaction();
-            session.update(person);
+            session.save(resume);
             session.getTransaction().commit();
         } catch (Exception e) {
             if (session.getTransaction() != null) {
@@ -79,6 +26,62 @@ public class PersonDaoIml implements Dao<Person, Integer> {
     }
 
     @Override
-    public void delete(Person person) {
+    public Resume find(Integer id) {
+        Resume resume = null;
+
+        try {
+            session.beginTransaction();
+            resume = (Resume) session.get(Resume.class, id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
+
+        return resume;
+    }
+
+    @Override
+    public List<Resume> findAll() {
+        List<Resume> resumes = null;
+
+        try {
+            session.beginTransaction();
+            resumes = (List<Resume>) session.createQuery("from Resume").list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
+
+        return resumes;
+    }
+
+    @Override
+    public void update(Resume resume) {
+        try {
+            session.beginTransaction();
+            session.update(resume);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void delete(Resume resume) {
     }
 }
