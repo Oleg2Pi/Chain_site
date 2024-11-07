@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "executor")
 @Data
@@ -21,4 +23,10 @@ public class Executor {
     @OneToOne
     @JoinColumn(name = "person_id", nullable = false, unique = true)
     private Person person;
+
+    @OneToOne(mappedBy = "executor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Resume resume;
+
+    @OneToMany(mappedBy = "executor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Work> works;
 }

@@ -1,8 +1,6 @@
 package by.polikarpov.utils;
 
-import by.polikarpov.entity.Executor;
-import by.polikarpov.entity.ImagePerson;
-import by.polikarpov.entity.Person;
+import by.polikarpov.entity.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,9 +15,15 @@ public class HibernateUtils {
     static {
         try {
             Configuration config = new Configuration().configure();
-            config.addAnnotatedClass(Person.class);
-            config.addAnnotatedClass(ImagePerson.class);
+            config.addAnnotatedClass(ActivityArea.class);
             config.addAnnotatedClass(Executor.class);
+            config.addAnnotatedClass(ImagePerson.class);
+            config.addAnnotatedClass(ImageVideo.class);
+            config.addAnnotatedClass(Person.class);
+            config.addAnnotatedClass(Resume.class);
+            config.addAnnotatedClass(UserStatus.class);
+            config.addAnnotatedClass(Work.class);
+            config.addAnnotatedClass(WorkExperience.class);
 
             sessionFactory = config.buildSessionFactory();
         } catch (HibernateException e) {
