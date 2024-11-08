@@ -18,7 +18,6 @@ public class HibernateUtils {
             config.addAnnotatedClass(ActivityArea.class);
             config.addAnnotatedClass(Executor.class);
             config.addAnnotatedClass(ImagePerson.class);
-            config.addAnnotatedClass(ImageVideo.class);
             config.addAnnotatedClass(Person.class);
             config.addAnnotatedClass(Resume.class);
             config.addAnnotatedClass(UserStatus.class);

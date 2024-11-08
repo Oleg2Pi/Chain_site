@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.Base64;
 
 @Entity
 @Table(name = "work")
-@ToString(exclude = {"executor", "imageVideo"})
+@ToString(exclude = {"executor"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,6 +30,11 @@ public class Work {
 
     private String description;
 
-    @OneToOne(mappedBy = "work", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ImageVideo imageVideo;
+    private byte[] file;
+
+    private String type;
+
+    public String getBase64Data() {
+        return Base64.getEncoder().encodeToString(file);
+    }
 }

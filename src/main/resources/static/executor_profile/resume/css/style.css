@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.row {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h1, h3, h4 {
+    margin: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.direction-button, .status-button {
+    flex: 1; /* Кнопки занимают одинаковую ширину */
+    min-width: 150px; /* Минимальная ширина кнопок */
+    border-radius: 20px;
+    padding: 20px;
+    border: 3px solid black;
+    background-color: white;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    text-align: center;
+    font-weight: bold;
+}
+
+.direction-button:hover, .status-button:hover {
+    background-color: #eee;
+}
+
+.direction-button.active, .status-button.active {
+    background-color: black;
+    color: white;
+}
+
+.slider-container {
+    width: 100%; /* Полная ширина блока */
+    text-align: center; /* Центрируем текст под ползунком */
+}
+
+.experience-slider {
+    width: 100%; /* Полная ширина блока */
+    margin-top: 15px;
+    appearance: none; /* Убираем стандартный стиль ползунка */
+    height: 8px; /* Высота ползунка */
+    background: white; /* Цвет ползунка */
+    border: 3px solid black; /* Черная граница ползунка */
+    border-radius: 10px; /* Плавные углы */
+}
+
+.experience-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Убираем стандартный стиль ползунка */
+    width: 20px; /* Ширина ползунка */
+    height: 20px; /* Высота ползунка */
+    border-radius: 50%; /* Круглая форма ползунка */
+    background: white; /* Цвет ползунка */
+    border: 2px solid black; /* Граница ползунка */
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.experience-input {
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 3px solid black;
+    font-size: 16px;
+    color: black;
+    resize: none;
+}
+
+#back {
+    color: black;
+    text-decoration: none;
+}
+
+h4 {
+    color: #585858;
+}
+
+.selected{
+    background-color: #1739D9;
+    color: white;
+}

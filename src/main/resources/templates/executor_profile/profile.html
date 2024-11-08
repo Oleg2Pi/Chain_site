@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChainApp</title>
+    
+    <link rel="stylesheet" th:href="@{/executor_profile/css/style.css}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Первый блок с аватаром и текстом -->
+        <div class="avatar-container">
+            <img class="img" th:src="@{'data:image/jpeg;base64,' + ${image}}" alt="">
+            <div class="text-content">
+                <h1 th:text="${person.getFirstName()}"/>
+
+                <span th:if="${activityArea != null}" th:text="${activityArea}"/>
+                <span th:if="${activityArea == null}">Нет направления, </span>
+
+                <span th:if="${activityArea != null}" th:text="${workExperience}"> опыта работы</span> <!-- Здесь будет отображаться информация о направлении и статусе -->
+                <span th:if="${activityArea == null}">Нет опыта работы</span>
+                <br>
+            </div>
+        </div>
+
+        <!-- Второй блок с кнопками -->
+        <div class="button-container">
+            <button class="big-button">search work</button>
+            <div class="small-buttons">
+                <button onclick="window.location.href=window.location.pathname + '/resume'" id="back1"></button>
+                <button class="pro-btn" id="back2"></button>
+            </div>
+        </div>
+
+        <!-- Заголовок "Портфолио" -->
+        <span class="section-title">Портфолио&nbsp;&nbsp;&nbsp;</span>
+        <a href="#">Исполнители</a>
+
+        <!-- Блок с медиа (фото и видео) -->
+        <div class="media-grid" id="mediaGrid" th:if="${works != null}">
+            <div th:each="work: ${works}">
+                <div th:if="${work.getType() == 'image'}">
+                    <img class="media-item" th:src="'data:image/png;base64,' + ${work.getBase64Data()}" alt="">
+                </div>
+                <div th:if="${work.getType() == 'video'}">
+                    <video class="media-item" th:src="'data:video/mp4;base64,' + ${work.getBase64Data()}" controls></video>
+                </div>
+            </div>
+        </div>
+
+        <div class="media-grid" th:if="${works == null}">
+            <h4>У вас еще нет добавленных работ</h4>
+        </div>
+
+        <!-- Кнопка "Показать скрытые" -->
+        <button id="showMoreButton" onclick="window.location.href=window.location.pathname + '/portfolio'">Показать все портфолио</button>
+    </div>
+</body>
+</html>

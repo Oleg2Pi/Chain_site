@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChainApp</title>
+    <link rel="stylesheet" th:href="@{/executor_profile/resume/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1><a href="javascript:void(0);" onclick="window.location.href=window.location.pathname" id="back"><</a></h1>
+            <h2>Резюме</h2>
+        </div>
+
+        <!-- Направление -->
+        <div class="row">
+            <h4>Направление:</h4>
+        </div>
+        <div class="row button-group">
+            <button class="direction-button" onclick="selectDirection('видео-креатор')">видео-креатор</button>
+            <button class="direction-button" onclick="selectDirection('монтажер')">монтажер</button>
+        </div>
+        <div class="row button-group">
+            <button class="direction-button" onclick="selectDirection('рилс-мейкер')">рилс-мейкер</button>
+            <button class="direction-button" onclick="selectDirection('фотограф')">фотограф</button>
+        </div>
+        <div class="row button-group">
+            <button class="direction-button" onclick="selectDirection('смм')">смм</button>
+        </div>
+
+        <!-- Опыт работы (ползунок) -->
+        <div class="row">
+            <h4>Опыт работы:</h4>
+        </div>
+        <div class="row">
+            <div class="slider-container">
+                <input type="range" class="experience-slider" min="1" max="3" step="1" value="1" onchange="updateExperience(this.value)">
+                <div class="slider-labels">
+                    <span>&gt;1</span>
+                    <span>2</span>
+                    <span>&gt;5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Статус -->
+        <div class="row">
+            <h4>Статус:</h4>
+        </div>
+        <div class="row button-group">
+            <button class="status-button" onclick="selectStatus('Ищу работу')">Ищу работу</button>
+            <button class="status-button" onclick="selectStatus('Рассматриваю предложения')">Рассматриваю предложения</button>
+            <button class="status-button" onclick="selectStatus('Не ищу работу')">Не ищу работу</button>
+        </div>
+
+        <!-- Текстовое поле для опыта работы -->
+        <div class="row">
+            <h4>Опыт работы:</h4>
+        </div>
+        <div class="row">
+            <textarea class="experience-input"></textarea>
+        </div>
+    </div>
+
+    <script>
+        function selectDirection(direction) {
+            const directionButtons = document.querySelectorAll('.direction-button');
+            directionButtons.forEach(button => button.classList.remove('selected'));
+            event.target.classList.add('selected');
+            localStorage.setItem('selectedDirection', direction);
+        }
+
+        function selectStatus(status) {
+            const statusButtons = document.querySelectorAll('.status-button');
+            statusButtons.forEach(button => button.classList.remove('selected'));
+            event.target.classList.add('selected');
+            localStorage.setItem('selectedStatus', status);
+        }
+
+        function updateExperience(value) {
+            localStorage.setItem('experience', value);
+        }
+    </script>
+</body>
+</html>
