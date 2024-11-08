@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Загрузка файла</title>
+  <style>
+    /* Скрываем стандартный input[type="file"] */
+    .file-input {
+      display: none;
+    }
+
+    /* Стилизация ссылки */
+    .upload-link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .upload-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#" class="upload-link" id="uploadLink">Нажмите сюда, чтобы загрузить файл</a>
+
+  <!-- Скрытый input для выбора файла -->
+  <input type="file" class="file-input" id="fileInput">
+
+  <script>
+    // Получаем элементы
+    const uploadLink = document.getElementById('uploadLink');
+    const fileInput = document.getElementById('fileInput');
+
+    // При клике на ссылку, эмулируем клик на скрытый input[type="file"]
+    uploadLink.addEventListener('click', function(event) {
+      event.preventDefault();  // Предотвращаем стандартное поведение ссылки
+      fileInput.click();  // Вызываем клик на input[type="file"]
+    });
+
+    // Обработчик изменения файла
+    fileInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];  // Получаем выбранный файл
+      if (file) {
+        alert(`Вы выбрали файл: ${file.name}`);
+      }
+    });
+  </script>
+
+</body>
+</html>

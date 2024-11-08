@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<hmtl lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/executor_portfolio/work/css/body.css}">
+    <link rel="stylesheet" th:href="@{/executor_portfolio/work/css/video.css}">
+    <title>ChainApp</title>
+  </head>
+  <body>
+    <div>
+      <div class="destination">
+        <a href="javascript:void(0);" onclick="window.location.href=window.location.pathname.replace('/create', '')">
+          &#10094;Портфолио
+        </a>
+      </div>
+
+      <form id="uploadForm" th:action="'/profile/' + ${idPerson} + '/portfolio'" method="post" enctype="multipart/form-data">
+        <div class="main-section">
+          <div class="download-box">
+            <a href="#" class="upload-link" id="uploadLink">Загрузить файл</a>
+            <input type="file" class="file-input" id="fileInput" name="file" required>
+          </div>
+          <input id="project-name" type="text" name="projectName" placeholder="Название проекта..." required>
+          <input id="description" type="text" name="description" placeholder="Описание" required>
+          <div class="publication-box">
+            <button type="submit" class="button">Опубликовать</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      const uploadLink = document.getElementById('uploadLink');
+      const fileInput = document.getElementById('fileInput');
+
+      uploadLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        fileInput.click();
+      });
+
+      fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          alert(`Вы выбрали файл: ${file.name}`);
+        }
+      });
+    </script>
+  </body>
+</hmtl>

@@ -1,16 +1,18 @@
 package by.polikarpov.controller;
 
 import by.polikarpov.entity.*;
+import by.polikarpov.service.ExecutorService;
 import by.polikarpov.service.PersonService;
 import by.polikarpov.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Base64;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -80,5 +82,43 @@ public class ProfileController {
         model.addAttribute("userStatus", resume.getUserStatus().getCategory());
         model.addAttribute("informationYourself", resume.getInformationYourself());
         return "executor_profile/resume/change";
+    }
+
+    @GetMapping("/{id}/portfolio")
+    public String portfolio(@PathVariable("id") int id, Model model) {
+        return "executor_portfolio/portfolio";
+    }
+
+    @GetMapping("/{id}/portfolio/create")
+    public String createWork(@PathVariable("id") int id, Model model) {
+        model.addAttribute("idPerson", id);
+        return "executor_portfolio/work/create_work";
+    }
+
+    @PostMapping("/{id}/portfolio")
+    public String saveWork(@PathVariable("id") int id,
+                           @RequestParam("file") MultipartFile file,
+                           @RequestParam("projectName") String projectName,
+                           @RequestParam("description") String description,
+                           Model model) throws IOException {
+        Person person = personService.getPersonById(id).orElse(null);
+
+        if (person == null && person.getExecutor() == null) {
+            return "error";
+        }
+
+        Work work = Work.builder()
+                .executor(person.getExecutor())
+                .name(projectName)
+                .dateAdded(Timestamp.valueOf(LocalDateTime.now()))
+                .description(description)
+                .file(file.getBytes())
+                .type(file.getContentType())
+                .build();
+
+        workService.saveWork(work);
+        System.out.println(work.toString());
+
+        return "redirect:/profile/" + id + "/portfolio";
     }
 }
