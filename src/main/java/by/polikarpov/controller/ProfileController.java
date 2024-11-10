@@ -25,9 +25,9 @@ public class ProfileController {
     @Autowired
     private WorkService workService;
 
-    @GetMapping("/{id}")
-    public String profile(@PathVariable("id") int id, Model model) {
-        Person person = personService.getPersonById(id).orElse(null);
+    @GetMapping("/{chatId}")
+    public String profile(@PathVariable("chatId") long chatId, Model model) {
+        Person person = personService.getPersonByChatId(chatId).orElse(null);
 
         if (person == null) {
             return "error";
@@ -60,9 +60,9 @@ public class ProfileController {
         return "executor_profile/profile";
     }
 
-    @GetMapping("/{id}/resume")
-    public String resume(@PathVariable("id") int id, Model model) {
-        Person person = personService.getPersonById(id).orElse(null);
+    @GetMapping("/{chatId}/resume")
+    public String resume(@PathVariable("chatId") Long chatId, Model model) {
+        Person person = personService.getPersonByChatId(chatId).orElse(null);
 
         if (person == null) {
             return "error";
@@ -84,24 +84,24 @@ public class ProfileController {
         return "executor_profile/resume/change";
     }
 
-    @GetMapping("/{id}/portfolio")
-    public String portfolio(@PathVariable("id") int id, Model model) {
+    @GetMapping("/{chatId}/portfolio")
+    public String portfolio(@PathVariable("chatId") Long chatId, Model model) {
         return "executor_portfolio/portfolio";
     }
 
-    @GetMapping("/{id}/portfolio/create")
-    public String createWork(@PathVariable("id") int id, Model model) {
-        model.addAttribute("idPerson", id);
+    @GetMapping("/{chatId}/portfolio/create")
+    public String createWork(@PathVariable("chatId") Long chatId, Model model) {
+        model.addAttribute("idPerson", chatId);
         return "executor_portfolio/work/create_work";
     }
 
-    @PostMapping("/{id}/portfolio")
-    public String saveWork(@PathVariable("id") int id,
+    @PostMapping("/{chatId}/portfolio")
+    public String saveWork(@PathVariable("chatId") Long chatId,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("projectName") String projectName,
                            @RequestParam("description") String description,
                            Model model) throws IOException {
-        Person person = personService.getPersonById(id).orElse(null);
+        Person person = personService.getPersonByChatId(chatId).orElse(null);
 
         if (person == null && person.getExecutor() == null) {
             return "error";
@@ -119,6 +119,6 @@ public class ProfileController {
         workService.saveWork(work);
         System.out.println(work.toString());
 
-        return "redirect:/profile/" + id + "/portfolio";
+        return "redirect:/profile/" + chatId + "/portfolio";
     }
 }

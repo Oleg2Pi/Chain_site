@@ -55,15 +55,9 @@ CREATE TABLE work
     executor_id INT REFERENCES executor (id) ON DELETE CASCADE NOT NULL,
     name        VARCHAR(124)                                   NOT NULL,
     date_added  TIMESTAMP                                      NOT NULL,
-    description TEXT                                           NOT NULL
-);
-
-CREATE TABLE image_video
-(
-    id      SERIAL PRIMARY KEY,
-    work_id INT REFERENCES work (id) ON DELETE CASCADE NOT NULL,
-    file    BYTEA                                      NOT NULL,
-    type    VARCHAR(124)                               NOT NULL
+    description TEXT                                           NOT NULL,
+    file        BYTEA                                          NOT NULL,
+    type        VARCHAR(124)                                   NOT NULL
 );
 
 INSERT INTO activity_area (type)
@@ -79,6 +73,6 @@ VALUES ('Ищу работу'),
        ('Не ищу работу');
 
 INSERT INTO work_experience (category)
-VALUES ('<1'),
-       ('3'),
-       ('>5');
+VALUES ('1 год'),
+       ('3 года'),
+       ('5 лет');

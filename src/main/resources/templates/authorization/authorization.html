@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // Получите данные о пользователе из Telegram Web App
+        const userData = window.Telegram.WebApp.initDataUnsafe;
+
+        // Проверьте, что данные были загружены
+        if (userData) {
+            // Получение ID пользователя
+            const chatId = userData.user.id;
+
+            // Перенаправление на ваш серверный маршрут с передачей ID пользователя в URL
+            // Пример редиректа: /redirect?user_id=USER_ID
+            window.location.href = window.location.pathname.replace("/authorization", `/profile/${chatId}`)
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

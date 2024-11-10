@@ -13,7 +13,7 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Optional<Person> getPersonById(int id) {
-        return personRepository.findById(id);
+    public Optional<Person> getPersonByChatId(long id) {
+        return Optional.ofNullable(personRepository.getPersonByChatId(id));
     }
 }
