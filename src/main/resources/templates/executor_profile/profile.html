@@ -12,7 +12,7 @@
     <div class="container">
         <!-- Первый блок с аватаром и текстом -->
         <div class="avatar-container">
-            <img class="img" th:src="@{'data:image/jpeg;base64,' + ${image}}" alt="">
+            <img class="img" th:src="@{${image}}" alt="">
             <div class="text-content">
                 <h1 th:text="${person.getFirstName()}"/>
 
@@ -38,21 +38,20 @@
         <span class="section-title">Портфолио&nbsp;&nbsp;&nbsp;</span>
         <a href="#">Исполнители</a>
 
+        <p th:text="${activityArea}"></p>
         <!-- Блок с медиа (фото и видео) -->
-        <div class="media-grid" id="mediaGrid" th:if="${works != null}">
-            <div th:each="work, iterStat: ${works}">
-                <div th:if="${iterStat.index < 10}">
-                    <div th:if="${work.getType().startsWith('image/')}">
-                        <img class="media-item" th:src="'data:image/png;base64,' + ${work.getBase64Data()}" alt="">
-                    </div>
-                    <div th:if="${work.getType().startsWith('video/')}">
-                        <video class="media-item" th:src="'data:video/mp4;base64,' + ${work.getBase64Data()}" controls></video>
-                    </div>
+        <div class="media-grid" id="mediaGrid" th:if="${!works.isEmpty()}">
+            <div th:each="work : ${works}">
+                <div th:if="${work.getType().startsWith('image/')}">
+                    <img class="media-item" th:src="@{${work.getFile()}}" alt="image">
+                </div>
+                <div th:if="${work.getType().startsWith('video/')}">
+                    <video class="media-item" th:src="@{${work.getFile()}}" controls></video>
                 </div>
             </div>
         </div>
 
-        <div class="media-grid" th:if="${works == null}">
+        <div class="media-grid" th:if="${works.isEmpty()}">
             <h4>У вас еще нет добавленных работ</h4>
         </div>
 

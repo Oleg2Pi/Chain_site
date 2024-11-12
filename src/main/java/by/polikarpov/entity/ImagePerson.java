@@ -3,8 +3,6 @@ package by.polikarpov.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Base64;
-
 @Entity
 @Table(name = "image_of_person")
 @ToString(exclude = {"person"})
@@ -22,9 +20,6 @@ public class ImagePerson {
     @JoinColumn(name = "person_id", nullable = false, unique = true)
     private Person person;
 
-    private byte[] file;
+    private String filePath;
 
-    public String getBase64Data() {
-        return Base64.getEncoder().encodeToString(file);
-    }
 }

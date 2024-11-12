@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.Base64;
 
 @Entity
 @Table(name = "work")
@@ -30,11 +29,8 @@ public class Work {
 
     private String description;
 
-    private byte[] file;
+    private String file;
 
     private String type;
 
-    public String getBase64Data() {
-        return Base64.getEncoder().encodeToString(file);
-    }
 }
