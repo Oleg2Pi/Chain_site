@@ -15,7 +15,7 @@
         </a>
       </div>
 
-      <form id="uploadForm" th:action="@{${chatId}/profile/portfolio/create}" method="post" enctype="multipart/form-data">
+      <form id="uploadForm" th:action="'/create_work/' + ${chatId}" method="post" enctype="multipart/form-data">
         <div class="main-section">
           <div class="download-box">
             <a href="#" class="upload-link" id="uploadLink">Загрузить файл</a>
