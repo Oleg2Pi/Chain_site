@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/profile")
 public class ProfileController {
 
     @Autowired
@@ -29,7 +28,14 @@ public class ProfileController {
 
     private String UPLOAD_DIR = "src/main/resources/static/upload_files/";
 
-    @GetMapping("/{chatId}")
+    @GetMapping("/{chatId}/main")
+    public String mainSite(@PathVariable("chatId") long chatId, Model model) {
+        model.addAttribute("chatId", chatId);
+
+        return "main";
+    }
+
+    @GetMapping("/{chatId}/profile")
     public String profile(@PathVariable("chatId") long chatId, Model model) {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
 
