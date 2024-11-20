@@ -1,0 +1,144 @@
+.searching-box {
+  padding-right:8px;
+  padding-left:8px;
+}
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper img {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width:100%;
+  box-sizing: border-box;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding-left: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #E4E4E4;
+  box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+}
+
+
+main {
+  width:100%;
+}
+.navigation-panel {
+  padding-left:5px;
+  padding-right:5px;
+}
+.menu {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+}
+.menu a {
+  white-space:nowrap;
+}
+.menu li a {
+  text-decoration: none;
+  color:black;
+  padding:4px 8px;
+  transition:.15s;
+}
+.menu li a:active {
+  background-color: black;
+  color:white;
+  border-radius:14px;
+}
+
+
+.grid-box {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  column-gap: 3px;
+  row-gap:3px;
+
+  margin-top:15px;
+  padding-left:8px;
+  padding-right:8px;
+}
+
+.column-box, .row-box {
+  background: #EFEEF4;
+  border-radius:10px;
+  display:flex;
+  justify-content: start;
+  align-items: end;
+}
+.column-box {
+  height:250px;
+}
+.row-box { 
+  height:150px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/*Information in the box*/
+.information-box {
+  display:flex;
+  align-items: center;
+  background-color:white;
+  border-radius:30px;
+  margin-right:10px;
+  margin-left:10px;
+  height:22px;
+  width:140px;
+
+  margin-bottom:10px;
+}
+.information-box a {
+  text-decoration: none;
+  background: #1739D9; 
+  border-radius:30px;
+  cursor: pointer;
+  height:22px;
+}
+.profile-info {
+  display:flex;
+  align-items: center;
+  width:80px;
+  color:white;
+  padding:4px 5px;
+  font-size:8px;
+  border-radius:30px;
+}
+.image {
+  width:15px;
+  height:15px;
+  border-radius:25px;
+  object-fit:cover;
+  object-position: center;
+  margin-right:3px;
+}
+
+.indication-box {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+.box {
+  margin-left:8px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fa-heart, .fa-eye {
+  font-size:8px;
+}
+.likes, .viewers {
+  margin-top:1px;
+  font-size:7px;
+}
