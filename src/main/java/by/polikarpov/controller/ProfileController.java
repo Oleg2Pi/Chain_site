@@ -105,7 +105,7 @@ public class ProfileController {
 
     @GetMapping("/profile/portfolio/create")
     public String createWork(@PathVariable("chatId") Long chatId, Model model) {
-        model.addAttribute("idPerson", chatId);
+        model.addAttribute("chatId", chatId);
         return "executor_portfolio/work/create_work";
     }
 
