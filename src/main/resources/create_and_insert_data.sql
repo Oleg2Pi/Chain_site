@@ -12,7 +12,7 @@ CREATE TABLE image_of_person
 (
     id        SERIAL PRIMARY KEY,
     person_id INT REFERENCES person (id) ON DELETE CASCADE NOT NULL,
-    file      BYTEA
+    file_path TEXT
 );
 
 CREATE TABLE executor
@@ -56,7 +56,7 @@ CREATE TABLE work
     name        VARCHAR(124)                                   NOT NULL,
     date_added  TIMESTAMP                                      NOT NULL,
     description TEXT                                           NOT NULL,
-    file        BYTEA                                          NOT NULL,
+    file        TEXT                                           NOT NULL,
     type        VARCHAR(124)                                   NOT NULL
 );
 
