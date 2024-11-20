@@ -1,10 +1,8 @@
 package by.polikarpov.controller;
 
 import by.polikarpov.entity.*;
-import by.polikarpov.service.ExecutorService;
 import by.polikarpov.service.PersonService;
 import by.polikarpov.service.WorkService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +16,33 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
+@RequestMapping("/{chatId}")
 public class ProfileController {
 
-    @Autowired
-    private PersonService personService;
+    private final PersonService personService;
 
-    @Autowired
-    private WorkService workService;
+    private final WorkService workService;
 
-    private String UPLOAD_DIR = "src/main/resources/static/upload_files/";
+    public ProfileController(PersonService personService, WorkService workService) {
+        this.personService = personService;
+        this.workService = workService;
+    }
 
-    @GetMapping("/{chatId}/main")
+    @GetMapping("/dev")
+    public String dev(@PathVariable("chatId") long chatId, Model model) {
+        model.addAttribute("chatId", chatId);
+
+        return "dev";
+    }
+
+    @GetMapping("/main")
     public String mainSite(@PathVariable("chatId") long chatId, Model model) {
         model.addAttribute("chatId", chatId);
 
         return "main";
     }
 
-    @GetMapping("/{chatId}/profile")
+    @GetMapping("/profile")
     public String profile(@PathVariable("chatId") long chatId, Model model) {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
 
@@ -66,7 +73,7 @@ public class ProfileController {
         return "executor_profile/profile";
     }
 
-    @GetMapping("/{chatId}/resume")
+    @GetMapping("/resume")
     public String resume(@PathVariable("chatId") Long chatId, Model model) {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
 
@@ -90,26 +97,27 @@ public class ProfileController {
         return "executor_profile/resume/change";
     }
 
-    @GetMapping("/{chatId}/portfolio")
-    public String portfolio(@PathVariable("chatId") Long chatId, Model model) {
+    @GetMapping("/profile/portfolio")
+    public String portfolio(@PathVariable String chatId, Model model) {
+        model.addAttribute("chatId", chatId);
         return "executor_portfolio/portfolio";
     }
 
-    @GetMapping("/{chatId}/portfolio/create")
+    @GetMapping("/profile/portfolio/create")
     public String createWork(@PathVariable("chatId") Long chatId, Model model) {
         model.addAttribute("idPerson", chatId);
         return "executor_portfolio/work/create_work";
     }
 
-    @PostMapping("/{chatId}/portfolio")
+    @PostMapping("/profile/portfolio/create")
     public String saveWork(@PathVariable("chatId") Long chatId,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("projectName") String projectName,
-                           @RequestParam("description") String description,
-                           Model model) throws IOException {
+                           @RequestParam("description") String description
+    ) throws IOException {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
 
-        if (person == null && person.getExecutor() == null) {
+        if (person == null) {
             return "error";
         }
 
@@ -126,7 +134,7 @@ public class ProfileController {
 
         workService.saveWork(work);
 
-        return "redirect:/profile/" + chatId + "/portfolio";
+        return "redirect:/portfolio";
     }
 
     private String download(MultipartFile file, Integer works) throws IOException {
@@ -135,7 +143,8 @@ public class ProfileController {
         String fileName = works + fileExtension;
         String filePath = null;
 
-        if (file.getContentType().startsWith("image")) {
+        String UPLOAD_DIR = "src/main/resources/static/upload_files/";
+        if (Objects.requireNonNull(file.getContentType()).startsWith("image")) {
             filePath = Paths.get(UPLOAD_DIR + "images_of_work/", fileName).toString();
         } else if (file.getContentType().startsWith("video")) {
             fileName = fileName.replace(fileExtension, ".mp4");

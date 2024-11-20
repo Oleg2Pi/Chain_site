@@ -15,8 +15,10 @@
   <main>
     <section class="searching-box">
       <div class="input-wrapper">
-        <img src="../../../../../../../Новая%20папка/Application-s-screen/10.0/icons/db8363977145207190d0645e3d02da5e.png" alt="Иконка">
-        <input type="text" placeholder="Поиск">
+        <img th:src="@{/main/icons/db8363977145207190d0645e3d02da5e.png}" alt="Иконка">
+        <label>
+          <input type="text" placeholder="Поиск">
+        </label>
       </div>
     </section>
     <section>
@@ -159,23 +161,23 @@
     </section>
     <section>
       <nav class="destination">
-        <a href="#">
-          <img class="icon" src="../../../../../../../Новая%20папка/Application-s-screen/10.0/icons/bb4f4438fed555fc0de040e50636d17c.png" alt="">
+        <a onclick="window.location.href=window.location.pathname">
+          <img class="icon" th:src="@{/main/icons/bb4f4438fed555fc0de040e50636d17c.png}" alt="">
           <div class="label">Главная</div>
         </a>
-        <a href="#">
-          <img class="icon" src="../../../../../../../Новая%20папка/Application-s-screen/10.0/icons/0eb96ce39ad8a84a8abf4c54adc84557.png" alt="">
+        <a onclick="window.location.href=window.location.pathname.replace('/main', '/dev')">
+          <img class="icon" th:src="@{/main//icons/0eb96ce39ad8a84a8abf4c54adc84557.png}" alt="">
           <div class="label">Обсуждения</div>
         </a>
-        <a href="#">
+        <a onclick="window.location.href=window.location.pathname.replace('/main', 'profile/portfolio/create')">
           <i class="fa-solid fa-plus" style="color: #1739d9;"></i>
         </a>
-        <a href="#">
-          <img class="icon" src="../../../../../../../Новая%20папка/Application-s-screen/10.0/icons/1c91c28f7aaab1905ad64360780b1655.png" alt="">
+        <a onclick="window.location.href=window.location.pathname.replace('/main', '/dev')">
+          <img class="icon" th:src="@{/main/icons/1c91c28f7aaab1905ad64360780b1655.png}" alt="">
           <div class="label">Академия</div>
         </a>
-        <a href="#">
-          <img class="icon" src="../../../../../../../Новая%20папка/Application-s-screen/10.0/icons/38cdc08a758915209fbc85fefe484a39.png" alt="">
+        <a onclick="window.location.href=window.location.pathname.replace('/main', '/profile')">
+          <img class="icon" th:src="@{/main/icons/38cdc08a758915209fbc85fefe484a39.png}" alt="">
           <div class="label">Профиль</div>
         </a>
       </nav>
