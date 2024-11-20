@@ -73,7 +73,7 @@ public class ProfileController {
         return "executor_profile/profile";
     }
 
-    @GetMapping("/resume")
+    @GetMapping("/profile/resume")
     public String resume(@PathVariable("chatId") Long chatId, Model model) {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
 
@@ -98,7 +98,7 @@ public class ProfileController {
     }
 
     @GetMapping("/profile/portfolio")
-    public String portfolio(@PathVariable String chatId, Model model) {
+    public String portfolio(@PathVariable("chatId") String chatId, Model model) {
         model.addAttribute("chatId", chatId);
         return "executor_portfolio/portfolio";
     }
@@ -134,7 +134,7 @@ public class ProfileController {
 
         workService.saveWork(work);
 
-        return "redirect:/portfolio";
+        return "redirect:%d/profile/portfolio".formatted(chatId);
     }
 
     private String download(MultipartFile file, Integer works) throws IOException {
