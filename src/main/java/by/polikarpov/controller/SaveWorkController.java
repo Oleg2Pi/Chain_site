@@ -52,7 +52,7 @@ public class SaveWorkController {
 
         workService.saveWork(work);
 
-        return "redirect:%d/profile/portfolio".formatted(chatId);
+        return "redirect:/" + chatId + "/profile/portfolio";
     }
 
     private String download(MultipartFile file, Integer works) throws IOException {
