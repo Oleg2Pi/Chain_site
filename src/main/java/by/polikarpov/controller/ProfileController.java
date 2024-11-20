@@ -34,6 +34,14 @@ public class ProfileController {
         return "main";
     }
 
+    @GetMapping("/main/{personId}")
+    public String showPerson(@PathVariable("chatId") String chatId,
+                             @PathVariable("personId") String personId, Model model) {
+        model.addAttribute("chatId", chatId);
+
+        return "dev";
+    }
+
     @GetMapping("/profile")
     public String profile(@PathVariable("chatId") long chatId, Model model) {
         Person person = personService.getPersonByChatId(chatId).orElse(null);
